@@ -1,17 +1,19 @@
 # devops-journey
 
 
-## run app
+
+## Week 1: Containerization
+### run app
 ``` sh
 go run ./src/main.go
 ```
 
-## run test
+### run test
 ```sh
 go test ./... 
 ```
 
-## docker-compose
+### docker-compose
 
 ```sh
 docker-compose up -d
