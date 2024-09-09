@@ -12,7 +12,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go application statically to ensure there are no dependencies on the system
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/bin/app ./src/main.go
+RUN go build -o /go/bin/app ./src/main.go
 
 # Step 2: Create a minimal, secure runtime image using a scratch image
 FROM scratch
