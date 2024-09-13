@@ -15,7 +15,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.21'  # Updated to match your go.mod file
+        go-version: '1.23'  # Updated to match your go.mod file
 
     - name: Run tests
       run: go test -v ./...
