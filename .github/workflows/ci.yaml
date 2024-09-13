@@ -51,7 +51,7 @@ jobs:
 
     - name: Package Helm chart
       run: |
-        helm package ./devops-journey
+        helm package ./helm-chart
 
     - name: Upload Helm chart as artifact
       uses: actions/upload-artifact@v3
