@@ -25,7 +25,7 @@ func TestGetAlbums(t *testing.T) {
 			{ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
 		}
 
-		var actualAlbums []string
+		var actualAlbums []app.Album
 		json.Unmarshal([]byte(response.Body.String()), &actualAlbums)
 
 		assert.Equal(t, http.StatusOK, response.Code)

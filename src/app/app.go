@@ -7,10 +7,10 @@ import (
 )
 
 type Album struct {
-	ID     string  `json: "Id"`
-	Title  string  `json: "title"`
-	Artist string  `json: artist"`
-	Price  float64 `json: "price"`
+	ID     string  `json:"id"`
+	Title  string  `json:"title"`
+	Artist string  `json:"artist"`
+	Price  float64 `json:"price"`
 }
 
 var albums = []Album{
@@ -25,5 +25,6 @@ func GetAlbums(c *gin.Context) {
 
 func SetUpRouter() *gin.Engine {
 	router := gin.Default()
+	router.GET("/albums", GetAlbums)
 	return router
 }
