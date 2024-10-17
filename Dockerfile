@@ -12,15 +12,20 @@ RUN go mod download
 COPY . .
 
 # Build the Go application statically to ensure there are no dependencies on the system
-RUN go build -o /go/bin/app ./src/main.go
+# RUN go build -o /go/bin/app ./src/main.go
+RUN GOOS=linux GOARCH=arm64 go build -o /go/bin/app ./src/main.go
+
+# Install CA certificates
+RUN apk --no-cache add ca-certificates
 
 # Step 2: Create a minimal, secure runtime image using a scratch image
-FROM scratch
+FROM alpine:latest
 
 # Copy the compiled Go binary from the builder stage
 COPY --from=builder /go/bin/app /usr/local/bin/app
 
 # Use a non-root user to run the application
+RUN adduser -D -u 1001 appuser
 USER 1001
 
 # Set the entry point to the compiled Go binary
