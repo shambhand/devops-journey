@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: helm-chart
-        path: devops-journey-*.tgz
+        path: devops-journey-0.1.0.tgz
 
   deploy:
     needs: build-and-push
@@ -64,10 +64,10 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: helm-chart
-        path: chart/devops-journey.tgz
+        path: chart/
 
     - name: deploy-to-dev
       run: |
-        helm upgrade --install devops-journey chart/devops-journey.tgz -n dev
+        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
         echo "Deployed to dev successfully!!"
       
