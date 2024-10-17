@@ -7,6 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +41,6 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-journey:latest
 
-
     - name: Set up Helm
       uses: azure/setup-helm@v3
       with:
@@ -51,7 +51,23 @@ jobs:
         helm package ./helm-chart
 
     - name: Upload Helm chart as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
+      with:
+        name: devops-journey-chart
+        path: devops-journey-*.tgz
+
+  deploy:
+    needs: build-and-push
+    runs-on: self-hosted # deploying to local k8s cluster
+    steps:
+    - name: Download Helm chart
+      uses: actions/download-artifact@v4
       with:
         name: helm-chart
-        path: devops-journey-*.tgz  
+        path: ./
+
+    - name: deploy-to-dev
+      run: |
+        helm upgrade --install devops-journey devops-journey-chart.tgz -n dev
+        echo "Deployed to dev successfully!!"
+      
