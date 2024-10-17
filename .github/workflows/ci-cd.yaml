@@ -56,7 +56,7 @@ jobs:
         name: helm-chart
         path: devops-journey-0.1.0.tgz
 
-  deploy:
+  DEV-Deploy:
     needs: build-and-push
     runs-on: self-hosted # deploying to local k8s cluster
     steps:
@@ -70,4 +70,34 @@ jobs:
       run: |
         helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
         echo "Deployed to dev successfully!!"
+
+  QA-Deploy:
+    needs: DEV-Deploy
+    runs-on: self-hosted # deploying to local k8s cluster
+    steps:
+    - name: Download Helm chart
+      uses: actions/download-artifact@v4
+      with:
+        name: helm-chart
+        path: chart/
+
+    - name: deploy-to-qa
+      run: |
+        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
+        echo "Deployed to QA successfully!!"
+
+  Prod-Deploy:
+    needs: QA-Deploy
+    runs-on: self-hosted # deploying to local k8s cluster
+    steps:
+    - name: Download Helm chart
+      uses: actions/download-artifact@v4
+      with:
+        name: helm-chart
+        path: chart/
+
+    - name: deploy-to-prod
+      run: |
+        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
+        echo "Deployed to Prod successfully!!"
       
