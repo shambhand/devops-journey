@@ -22,7 +22,7 @@ jobs:
       run: go test -v ./...
 
   Build-Push:
-    needs: Run Tests
+    needs: Run-Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
