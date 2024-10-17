@@ -40,9 +40,6 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-journey:latest
 
-    - name: Image digest
-      run: |
-        docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKERHUB_USERNAME }}/devops-journey:latest
 
     - name: Set up Helm
       uses: azure/setup-helm@v3
