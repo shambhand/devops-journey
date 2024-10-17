@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  test:
+  Run Tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -18,11 +18,11 @@ jobs:
       with:
         go-version: '1.23'  # Make sure this matches your go.mod file
 
-    - name: Run tests
+    - name: run tests
       run: go test -v ./...
 
-  build-and-push:
-    needs: test
+  Build-Push:
+    needs: Run Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
         path: devops-journey-0.1.0.tgz
 
   DEV-Deploy:
-    needs: build-and-push
+    needs: Build-Push
     runs-on: self-hosted # deploying to local k8s cluster
     steps:
     - name: Download Helm chart
