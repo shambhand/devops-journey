@@ -83,7 +83,7 @@ jobs:
 
     - name: deploy-to-qa
       run: |
-        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
+        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n qa
         echo "Deployed to QA successfully!!"
 
   Prod-Deploy:
@@ -98,6 +98,6 @@ jobs:
 
     - name: deploy-to-prod
       run: |
-        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n dev
+        helm upgrade --install devops-journey chart/devops-journey-0.1.0.tgz -n prod
         echo "Deployed to Prod successfully!!"
       
