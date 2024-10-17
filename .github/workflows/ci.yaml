@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  - name: FORCE_JAVASCRIPT_ACTIONS_TO_NODE20=true
+
 jobs:
 
   test:
@@ -53,8 +56,8 @@ jobs:
     - name: Upload Helm chart as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: devops-journey-chart
-        path: devops-journey-*.tgz
+        name: helm-chart
+        path: devops-journey/helm-chart.tgz
 
   deploy:
     needs: build-and-push
@@ -64,7 +67,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: helm-chart
-        path: ./
+        path: devops-journey/helm-chart.tgz
 
     - name: deploy-to-dev
       run: |
