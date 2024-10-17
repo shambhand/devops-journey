@@ -63,11 +63,11 @@ jobs:
     - name: Download Helm chart
       uses: actions/download-artifact@v4
       with:
-        name: helm-chart
+        name: devops-journey-chart
         path: devops-journey-*.tgz
 
     - name: deploy-to-dev
       run: |
-        helm upgrade --install devops-journey helm-chart.tgz -n dev
+        helm upgrade --install devops-journey devops-journey-chart.tgz -n dev
         echo "Deployed to dev successfully!!"
       
