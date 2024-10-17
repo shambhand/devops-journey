@@ -1,6 +1,6 @@
 # devops-journey
 
-[![Go App CI/CD](https://github.com/shambhand/devops-journey/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/shambhand/devops-journey/actions/workflows/ci-cd.yaml)
+[![Build](https://github.com/shambhand/devops-journey/actions/workflows/ci-cd.yaml/badge.svg?branch=main)](https://github.com/shambhand/devops-journey/actions/workflows/ci-cd.yaml)
 
 ## Week 1: Containerization
 ### run app
