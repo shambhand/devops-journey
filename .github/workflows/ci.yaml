@@ -64,7 +64,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: helm-chart
-        path: devops-journey-*.tgz
+        path: devops-journey-chart.tgz
 
     - name: deploy-to-dev
       run: |
